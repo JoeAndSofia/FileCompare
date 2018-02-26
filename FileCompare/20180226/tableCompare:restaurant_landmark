@@ -1,0 +1,5 @@
+'CREATE TABLE `restaurant_landmark` (
+  `restaurant_id` bigint(20) NOT NULL,
+  `landmark_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`restaurant_id`,`landmark_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4'
