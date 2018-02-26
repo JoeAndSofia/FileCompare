@@ -1,15 +1,18 @@
-'id', 'bigint(20)', 'NO', 'PRI', NULL, 'auto_increment'
-'name', 'varchar(100)', 'NO', '', NULL, ''
-'status', 'tinyint(1)', 'NO', '', NULL, ''
-'type_id', 'bigint(20)', 'NO', '', NULL, ''
-'icon_image_url', 'varchar(500)', 'NO', '', NULL, ''
-'icon_image_url_highlighted', 'varchar(500)', 'NO', '', NULL, ''
-'city_id', 'bigint(20)', 'NO', '', NULL, ''
-'district_id', 'bigint(20)', 'NO', '', NULL, ''
-'area_id', 'bigint(20)', 'NO', '', NULL, ''
-'description', 'varchar(1000)', 'NO', '', NULL, ''
-'latitude', 'double', 'NO', '', NULL, ''
-'longitude', 'double', 'NO', '', NULL, ''
-'seo_keyword', 'varchar(255)', 'NO', '', NULL, ''
-'popular', 'tinyint(4)', 'YES', '', NULL, ''
-'sort_order', 'int(11)', 'YES', '', NULL, ''
+'CREATE TABLE `landmark` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `status` tinyint(1) NOT NULL,
+  `type_id` bigint(20) NOT NULL,
+  `icon_image_url` varchar(500) NOT NULL,
+  `icon_image_url_highlighted` varchar(500) NOT NULL,
+  `city_id` bigint(20) NOT NULL,
+  `district_id` bigint(20) NOT NULL,
+  `area_id` bigint(20) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `latitude` double NOT NULL,
+  `longitude` double NOT NULL,
+  `seo_keyword` varchar(255) NOT NULL,
+  `popular` tinyint(4) DEFAULT NULL,
+  `sort_order` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1467 DEFAULT CHARSET=utf8mb4'
