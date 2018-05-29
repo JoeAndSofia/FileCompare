@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TV-Wall</title>
+    <style>
+        .wall {
+            margin: 15px;
+
+            height: 251px;
+            width: 579px;
+
+            border: solid 0.3px #000;
+            box-sizing: border-box;
+
+            background-color: #ffffff;
+
+            position: relative;
+
+            overflow: hidden;
+        }
+
+        .left{
+            height:100%;
+            width:132.5px;
+            /*border: solid 0.1px #000;*/
+            border-right:solid 0.3px #ddd;
+            box-sizing: border-box;
+
+            background-color: #e0e0e0;
+
+            float: left;
+            position: absolute;
+            left: 0px;
+            top: 0px;
+        }
+
+        .right{
+            height:100%;
+            width: 130.5px;
+            /*border: solid 0.1px #000;*/
+            border-left:solid 0.3px #ddd;
+            box-sizing: border-box;
+
+            background-color: #e0e0e0;
+
+            float:left;
+            position: absolute;
+            right: 0px;
+            top: 0px;
+        }
+
+        .horizontal{
+            height:60px;
+            width: 100%;
+
+            border: solid 0.3px #999;
+            box-sizing: border-box;
+        }
+
+        .center{
+            height:100%;
+            width: 316px;
+
+            border: solid #ece4c8;
+            border-bottom: none;
+            box-sizing: border-box;
+
+
+            background-color: #e0e0e0;
+
+            position: absolute;
+            left:132.5px;
+            top: 0px;
+
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+        }
+
+        .vertical{
+            height: 100%;
+            border: solid 0.3px #999;
+            flex-grow:calc(316/3);
+            background-image: url('http://pic.58pic.com/58pic/16/41/70/52M58PICyhW_1024.jpg');
+            background-repeat: round;
+            background-size: cover;
+        }
+
+        .v-left{
+
+        }
+
+        .v-center{
+
+        }
+
+        .v-right{
+
+        }
+
+
+        .control{
+            margin: 15px;
+
+        }
+
+        .drag-control-item{
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .image-control{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            height:240px;
+            width: 579px;
+        }
+
+        .image-control-item{
+            display: inline-block;
+            width: 20%;
+            height:33%;
+            background-repeat: round;
+            flex-grow: 0.3
+        }
+    </style>
+
+</head>
+<body>
+    <div class="wall" display="block">
+        <div class="left">
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+        </div>
+
+        <div class="center" id="center-part" style="border-width: 10px;">
+            <div class="vertical" id="center-left"></div>
+            <div class="vertical" id="center-center"></div>
+            <div class="vertical" id="center-right"></div>
+        </div>
+
+        <div class="right">
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+            <div class="horizontal"></div>
+        </div>
+    </div>
+
+
+    <div class="control">
+        <div>
+            <label class="drag-control-item" for="center-border" style="width:75px;">边框</label>
+            <input type="button" value="<" onclick="addCenterPartBorderWidth(window.event, -1)">
+            <input class="drag-control-item" id="center-border" type="range" style="width:360px" min="0" max="125" onchange="changeCenterPartBorder(window.event)" oninput="changeCenterPartBorder(window.event)">
+            <input type="button" value=">" onclick="addCenterPartBorderWidth(window.event, 1)">
+            <input class="drag-control-item" id="center-border-value" type="text" style="width:60px" readonly>
+        </div>
+
+        <div>
+            <label class="drag-control-item" for="center-center-width" style="width:75px;">中间大小</label>
+            <input type="button" value="<" onclick="addCenterCenterPartWidth(window.event, -1)">
+            <input class="drag-control-item" id="center-center-width" type="range" style="width:360px" min="0" max="316" onchange="changeCenterCenterPartWitdh(window.event)" oninput="changeCenterCenterPartWitdh(window.event)">
+            <input type="button" value=">" onclick="addCenterCenterPartWidth(window.event, 1)">
+            <input class="drag-control-item" id="center-center-width-value" type="text" style="width:60px" readonly>
+        </div>
+
+        <div>
+            <p>大理石</p>
+            <div class="image-control">
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic98.nipic.com/file/20160520/21714943_141008932000_2.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic.58pic.com/58pic/16/41/70/52M58PICyhW_1024.jpg');"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/06/84/32bOOOPICcc_1024.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic31.photophoto.cn/20140506/0040039776514772_b.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/87/46/06b1OOOPIC80.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/07/94/19bOOOPIC5a_1024.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/27/48/04bOOOPIC04_1024.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/33/00/61bOOOPICc5_1024.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/29/98/17b1OOOPIC39.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://img2.imgtn.bdimg.com/it/u=1991052621,3521804103&fm=27&gp=0.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://img2.imgtn.bdimg.com/it/u=2145000143,1130693553&fm=27&gp=0.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://bpic.ooopic.com/16/05/27/16052748-eb0fd8ad660b757b2dd07a556cc0d4ee.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic66.nipic.com/file/20150511/11998384_034501984000_2.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/03/32/16/87b1OOOPICed.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic.shejiben.com/caizhi/day_110711/20110711_8b85a8d18eb1a183f1f17hH1JtVi2FS5.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic43.photophoto.cn/20170604/0016098964380546_b.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic.shejiben.com/caizhi/day_131114/20131114_c74af3226f83b75c8508fJC1bo7dtxLv.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic2.ooopic.com/12/49/44/35bOOOPIC1f_1024.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://imgsrc.baidu.com/image/c0%3Dpixel_huitu%2C0%2C0%2C294%2C40/sign=33a6a8f615178a82da3177e09f7b16e1/1c950a7b02087bf4bb5105d3f9d3572c11dfcf4f.jpg')"></div>
+                <div class="image-control-item" tabindex="-1"  onclick="changeCenterPartBackground()" style="background-image: url('http://pic43.photophoto.cn/20170605/0016098994592342_b.jpg')"></div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+	    var centerPart = document.getElementById("center-part")
+	    var centerPartBorderControl = document.getElementById("center-border")
+        var centerPartBorderValue = document.getElementById("center-border-value");
+
+        function changeCenterPartBorder(event, setValue){
+        	var value = 0
+
+        	if(setValue == null){
+		        value = centerPartBorderControl.value
+//		        console.log("getValue", value);
+            }else{
+        		value = setValue
+                if(value > 125){
+        			value = 125
+        		}else if(value < 0){
+                	value = 0
+                }
+                centerPartBorderControl.value = value
+//                console.log("setValue", value);
+            }
+
+        	centerPartBorderValue.value = value;
+            centerPart.style.borderWidth = value + "px"
+        }
+
+        function addCenterPartBorderWidth(event, amount){
+        	var valueResult = parseInt(centerPartBorderControl.value) + amount
+//            console.log("new value", valueResult);
+        	changeCenterPartBorder(window.event, valueResult)
+        }
+
+        changeCenterPartBorder(window.event, 10);
+
+
+	    var centerPartTotalWidthTotal = 316
+        var centerCenterPart = document.getElementById("center-center")
+        var centerLeftPart = document.getElementById("center-left")
+	    var centerRightPart = document.getElementById("center-right")
+        var centerCenterWidthControl = document.getElementById("center-center-width")
+	    var centerCenterWidthValue = document.getElementById("center-center-width-value")
+
+        function changeCenterCenterPartWitdh(event, setValue){
+            var value = 0
+
+            if(setValue == null){
+            	value = centerCenterWidthControl.value
+//                console.log("getValue", value)
+            }else{
+            	value = setValue
+                if(value > centerPartTotalWidthTotal){
+            		value = centerPartTotalWidthTotal
+                }else if(value < 0){
+                	value = 0
+                }
+                centerCenterWidthControl.value = value
+//                console.log("setValue", value)
+            }
+
+            centerCenterWidthValue.value = parseFloat(value).toFixed(1)
+            centerCenterPart.style.flexGrow = value
+            centerLeftPart.style.flexGrow = centerRightPart.style.flexGrow = ((316 - value) / 2)
+        }
+
+        function addCenterCenterPartWidth(event, amount){
+        	var valueResult = parseFloat(getComputedStyle(centerCenterPart).flexGrow) + amount
+//	        console.log("valueResult", valueResult)
+            changeCenterCenterPartWitdh(window.event, valueResult)
+        }
+
+        changeCenterCenterPartWitdh(window.event, 316/3)
+
+        function changeCenterPartBackground(){
+            var imageUrlStr = getComputedStyle(window.event.target).backgroundImage
+            console.log(imageUrlStr);
+            centerLeftPart.style.backgroundImage = imageUrlStr
+            centerCenterPart.style.backgroundImage = imageUrlStr
+            centerRightPart.style.backgroundImage = imageUrlStr
+        }
+
+    </script>
+</body>
+</html>
